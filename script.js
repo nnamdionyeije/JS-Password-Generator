@@ -34,16 +34,21 @@ function generatePassword() {
   if (isNaN(length)) {
     alert("Input must be provided as a number");
     //find a way to have this line redirect the user back up to line 28
+    generatePassword();
   } else if (length < 8 || length > 128) {
     alert("Input must be a valid number");    
+    generatePassword();
     //find a way to have this line redirect the user back up to line 28
+  } else {
+    specChar = confirm("Click OK to confirm including special characters.");
+    numChar = confirm("Click OK to confirm including numeric characters.");
+    lowCase = confirm("Click OK to confirm including lowercase characters.");
+    upCase = confirm("Click OK to confirm including uppercase characters.");
 
+    
   }
 
-  specChar = confirm("Click OK to confirm including special characters.");
-  numChar = confirm("Click OK to confirm including numeric characters.");
-  lowCase = confirm("Click OK to confirm including lowercase characters.");
-  upCase = confirm("Click OK to confirm including uppercase characters.");
+ 
 
   
   
