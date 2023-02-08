@@ -89,7 +89,7 @@ function characterTypes(inputLength) {
 
 function generatePassword() {
   
-  var length = prompt("Please choose a password length between 8 and 128 characters");
+  var length = prompt("How many characters would you like your password to contain?\nPlease choose a length between 8 and 128");
 
   var finalPassword = [];
 
