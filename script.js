@@ -63,7 +63,6 @@ function charArr(spec, num, low, up) {
   return charArray;
 }
 
-
 function characterTypes(inputLength) {
   var finalPassword = [];
 
@@ -73,7 +72,7 @@ function characterTypes(inputLength) {
   var upCase = confirm("Click OK to confirm including uppercase characters.");
 
   if (specChar === false && numChar === false && lowCase === false && upCase === false) {
-    alert("Must choose at least one character type");
+    alert("You must choose at least one character type");
     finalPassword = characterTypes(inputLength);
   } else {
     var characterArray = charArr(specChar, numChar, lowCase, upCase);
@@ -88,10 +87,9 @@ function characterTypes(inputLength) {
   return finalPassword;
 }
 
-
 function generatePassword() {
   
-  var length = prompt("Input password length between 8 and 128 characters");
+  var length = prompt("Choose a password length between 8 and 128 characters");
 
   var finalPassword = [];
 
