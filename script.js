@@ -15,7 +15,6 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function charArr(spec, num, low, up) {
-
   //creates an array of all the special character values
   var specArray = [];
   for (i = 0; i < 16; i++) {
@@ -64,47 +63,48 @@ function charArr(spec, num, low, up) {
   return charArray;
 }
 
-// only "issues"
-// I would like to avoid the "undefined" text being placedd into the box in some cases
-// seems to only happen when the function is recalled
-// not a major issue but worth dealing with
+
+function characterTypes(inputLength) {
+  var finalPassword = [];
+
+  var specChar = confirm("Click OK to confirm including special characters.");
+  var numChar = confirm("Click OK to confirm including numeric characters.");
+  var lowCase = confirm("Click OK to confirm including lowercase characters.");
+  var upCase = confirm("Click OK to confirm including uppercase characters.");
+
+  if (specChar === false && numChar === false && lowCase === false && upCase === false) {
+    alert("Must choose at least one character type");
+    finalPassword = characterTypes(inputLength);
+  } else {
+    var characterArray = charArr(specChar, numChar, lowCase, upCase);
+    console.log(characterArray);
+    for (i = 0; i < inputLength; i++) {
+      var currentNum = Math.floor(Math.random() * (characterArray.length));
+      finalPassword[i] = String.fromCharCode(characterArray[currentNum]);
+    }
+    finalPassword = finalPassword.join("");
+  } 
+
+  return finalPassword;
+}
+
+
 function generatePassword() {
   
   var length = prompt("Input password length between 8 and 128 characters");
-  var specChar = false;
-  var numChar = false;
-  var lowCase = false;
-  var upCase = false;
+
   var finalPassword = [];
 
   if (length === null) {
     return "";
   } else if (isNaN(length)) {
     alert("Input must be provided as a number");
-    generatePassword();
+    return generatePassword(); // most recent changes
   } else if (length < 8 || length > 128) {
     alert("Input must be a valid number");    
-    generatePassword();
+    return generatePassword(); // most recent changes
   } else {
-    specChar = confirm("Click OK to confirm including special characters.");
-    numChar = confirm("Click OK to confirm including numeric characters.");
-    lowCase = confirm("Click OK to confirm including lowercase characters.");
-    upCase = confirm("Click OK to confirm including uppercase characters.");
-    
-    if (specChar === false && numChar === false && lowCase === false && upCase === false) {
-      alert("Must choose one character type");
-      return "";
-      //I could possibly user helper functions in order to split these bit and allow this alert to redirect to the first specChar confirm
-    } else {
-      var characterArray = charArr(specChar, numChar, lowCase, upCase);
-      console.log(characterArray);
-      for (i = 0; i < length; i++) {
-        var currentNum = Math.floor(Math.random() * (characterArray.length));
-        finalPassword[i] = String.fromCharCode(characterArray[currentNum]);
-      }
-      console.log(finalPassword);
-      finalPassword = finalPassword.join("");
-    } 
-    return finalPassword;
+    var retValue = characterTypes(length);
+    return retValue;
   }
 }
