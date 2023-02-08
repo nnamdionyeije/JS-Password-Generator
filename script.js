@@ -13,16 +13,6 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// function getLength() {
-//   var length = prompt("Input password length between 8 and 128 characters");
-
-//   if (isNaN(length)) {
-//     alert("Input must be a valid number");
-//   } else if (length < 8 || length > 128) {
-//     alert("Input must be a valid number");    
-//   }
-// }
-
 
 function charArr(spec, num, low, up) {
 
@@ -74,6 +64,10 @@ function charArr(spec, num, low, up) {
   return charArray;
 }
 
+// only "issues"
+// I would like to avoid the "undefined" text being placedd into the box in some cases
+// seems to only happen when the function is recalled
+// not a major issue but worth dealing with
 function generatePassword() {
   
   var length = prompt("Input password length between 8 and 128 characters");
@@ -83,14 +77,14 @@ function generatePassword() {
   var upCase = false;
   var finalPassword = [];
 
-  if (isNaN(length)) {
+  if (length === null) {
+    return "";
+  } else if (isNaN(length)) {
     alert("Input must be provided as a number");
-    //find a way to have this line redirect the user back up to line 28
     generatePassword();
   } else if (length < 8 || length > 128) {
     alert("Input must be a valid number");    
     generatePassword();
-    //find a way to have this line redirect the user back up to line 28
   } else {
     specChar = confirm("Click OK to confirm including special characters.");
     numChar = confirm("Click OK to confirm including numeric characters.");
@@ -99,6 +93,7 @@ function generatePassword() {
     
     if (specChar === false && numChar === false && lowCase === false && upCase === false) {
       alert("Must choose one character type");
+      return "";
       //I could possibly user helper functions in order to split these bit and allow this alert to redirect to the first specChar confirm
     } else {
       var characterArray = charArr(specChar, numChar, lowCase, upCase);
@@ -108,20 +103,8 @@ function generatePassword() {
         finalPassword[i] = String.fromCharCode(characterArray[currentNum]);
       }
       console.log(finalPassword);
-      finalPassword = finalPassword.join("")
-
-
+      finalPassword = finalPassword.join("");
     } 
     return finalPassword;
   }
-
- 
-
-  
-  
-  
-  
-  
-  
-
 }
