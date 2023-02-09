@@ -47,7 +47,7 @@ function charArr(spec, num, low, up) {
   }
 
   var charArray = [];
-
+  // concatenates the new arrays to what will be returned based on input
   if (spec === true) {
     charArray = charArray.concat(specArray);
   } 
@@ -76,7 +76,6 @@ function characterTypes(inputLength) {
     finalPassword = characterTypes(inputLength);
   } else {
     var characterArray = charArr(specChar, numChar, lowCase, upCase);
-    console.log(characterArray);
     for (i = 0; i < inputLength; i++) {
       var currentNum = Math.floor(Math.random() * (characterArray.length));
       finalPassword[i] = String.fromCharCode(characterArray[currentNum]);
@@ -91,18 +90,15 @@ function generatePassword() {
   
   var length = prompt("How many characters would you like your password to contain?\nPlease choose a length between 8 and 128");
 
-  var finalPassword = [];
-
   if (length === null) {
     return "";
   } else if (isNaN(length)) {
     alert("Input must be provided as a number");
-    return generatePassword(); // most recent changes
+    return generatePassword(); 
   } else if (length < 8 || length > 128) {
     alert("Input must be a valid number");    
-    return generatePassword(); // most recent changes
+    return generatePassword(); 
   } else {
-    var retValue = characterTypes(length);
-    return retValue;
+    return characterTypes(length);
   }
 }
